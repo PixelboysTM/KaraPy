@@ -1,6 +1,6 @@
-from KaraWorld import World
-from Enums import Move, Sensor, Type 
-import XMLloader
+from KaraPy.KaraWorld import World
+from KaraPy.Enums import Move, Sensor, Type 
+from KaraPy.XMLloader import *
 # Kara = World(5)
 # Kara.build()
 # Kara.Place(Type.Kara, (0, 0))
@@ -16,7 +16,7 @@ import XMLloader
 
 # Walk()
 
-W = XMLloader.LoadWorldFile("test.world", 3)
+W = LoadWorldFile("test.world", 3)
 W.setSpeed(1)
 def carry1():
     if not W.getSensor(Sensor.TF) and not W.getSensor(Sensor.L):

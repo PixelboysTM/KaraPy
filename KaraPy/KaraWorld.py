@@ -13,18 +13,35 @@ class World(object):
     global worldType
     global availableT
     
+    def getKara(self):
+        global Kara
+        return Kara
+    
+    def getFacing(self):
+        global facing
+        return facing
+    
+    def getKaraPos(self):
+        global KaraPos
+        return KaraPos
+    
+    def getSize(self):
+        global width, height, mesh
+        return (int(width/mesh), int(height/mesh))
 
-    def __init__(self,  meshSize,size=(600, 600), sp = 0.5):
-        global height, width, mesh, world, Kara, speed, worldType, availableT
+    def __init__(self,  meshSize, size, sp = 0.5):
+        global height, width, mesh, world, Kara, speed, worldType, availableT, KaraPos
         height, width = size
-        mesh = meshSize * 10
+        height = height*50 * meshSize
+        width = width*50 * meshSize
+        mesh =  1 * 50 * meshSize 
         world = []
         worldType = []
         availableT = []
         Kara = False
+        KaraPos = (0,0)
         if sp >= 0 and sp <= 1:
             speed = 1.1 - sp 
-            speed = speed * 10
         else:
             print("Speed value must be between 0 and 1! \nDefaulted it to 0.5")
             speed = 0.5
@@ -122,18 +139,18 @@ class World(object):
                 xa = x * mesh - width/2  + mesh/2
                 ya = y * mesh - height/2 + mesh/2
                 if not Kara:
-                        t = turtle.Turtle()
-                        t.shape("turtle")
-                        t.shapesize((mesh - 10) /30)
-                        t.color("red")
-                        t.penup()
-                        t.hideturtle()
-                        t.goto(xa, ya)
-                        t.showturtle()
-                        facing = Facing.Right
-                        KaraPos = (x,y)
-                        Kara = True
-                        KaraObj = t
+                    t = turtle.Turtle()
+                    t.shape("turtle")
+                    t.shapesize((mesh - 10) /30)
+                    t.color("red")
+                    t.penup()
+                    t.hideturtle()
+                    t.goto(xa, ya)
+                    t.showturtle()
+                    facing = Facing.Right
+                    KaraPos = (x,y)
+                    Kara = True
+                    KaraObj = t
                 else:
                     print("There is already one Kara in the world")
             else:
