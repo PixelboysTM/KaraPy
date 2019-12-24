@@ -12,6 +12,7 @@ class World(object):
     global speed
     global worldType
     global availableT
+    global title
     
     def getKara(self):
         global Kara
@@ -29,8 +30,8 @@ class World(object):
         global width, height, mesh
         return (int(width/mesh), int(height/mesh))
 
-    def __init__(self,  meshSize, size, sp = 0.5):
-        global height, width, mesh, world, Kara, speed, worldType, availableT, KaraPos
+    def __init__(self,  meshSize, size, sp = 0.5, _title=""):
+        global height, width, mesh, world, Kara, speed, worldType, availableT, KaraPos, title
         height, width = size
         height = height*50 * meshSize
         width = width*50 * meshSize
@@ -38,6 +39,7 @@ class World(object):
         world = []
         worldType = []
         availableT = []
+        title = _title
         Kara = False
         KaraPos = (0,0)
         if sp >= 0 and sp <= 1:
@@ -47,12 +49,13 @@ class World(object):
             speed = 0.5
 
     def build(self):
-        global canvas, height, width, t, mesh, world, speed, worldType
+        global canvas, height, width, t, mesh, world, speed, worldType, title
         canvas = turtle.Screen()
+        #canvas.bgpic("logo.gif")
         canvas.setup(width=width + 100, height=height + 100)
         canvas.screensize(width , height)
         canvas.bgcolor("lightgreen")
-        canvas.title("Kara Python version 0.1")
+        canvas.title("Kara Python version 0.2 " + title )
         t = turtle.Turtle()
         t.speed(10)
         t.hideturtle()

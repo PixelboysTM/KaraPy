@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="KaraPy", # Replace with your own username
-    version="0.3.1",
+    version="0.4.0",
     author="Pixelboys_TM",
     author_email="none@n.com",
     description="A Kara runtime for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/Pixelboys_TM/KaraPY",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -12,7 +12,7 @@ def LoadWorldFile(source, size=0.5):
     sizey = int(root.attrib["sizey"]) 
 
     
-    W = World(meshSize=size,size=(sizex,sizey))
+    W = World(meshSize=size,size=(sizex,sizey), sp=0.5, _title="XmlLoaded: " + source)
     W.build()
     
     T = root.find("XmlWallPoints")
@@ -43,30 +43,30 @@ def LoadWorldFile(source, size=0.5):
     return W
 
 def SaveWorldFile(World,Source):
-    x,y = World.getSize()
+    sizex,sizey = World.getSize()
 
 
-    x = str(x)
-    y = str(y)
+
     ka = World.getKara()
     fac = World.getFacing()
     po = World.getKaraPos()
 
     data = ET.Element("XmlWorld")
-    data.set("sizex", x)
-    data.set("sizey", y)
+    data.set("sizex", str(sizex))
+    data.set("sizey", str(sizey))
     data.set("version", "KaraX 1.0 kara")
     t = ET.SubElement(data, "XmlWallPoints")
     p = ET.SubElement(data, "XmlObstaclePoints")
     k = ET.SubElement(data, "XmlPaintedfieldPoints")
     m = ET.SubElement(data, "XmlKaraList")
+    s = ET.SubElement(data, "XmlStreetList")
     if ka:
         kara = ET.SubElement(m, "XmlKara")
         kara.set("direction", str(fac.value))
         kara.set("name", "Kara")
         xk, yk = po
         kara.set("x" , str(xk))
-        kara.set("y", str(y - yk))
+        kara.set("y", str(sizey - yk -1))
 
     array = []
     a = World.getWorldArray()
@@ -76,13 +76,13 @@ def SaveWorldFile(World,Source):
             if a[xi][yi] == "T":
                 f = ET.SubElement(t, "XmlPoint")
                 f.set("x", str(xi))
-                f.set("y", str(y - yi))
+                f.set("y", str(sizey - yi -1))
                 array.append(f)
             if a[xi][yi] == "L":
                 f = ET.SubElement(k, "XmlPoint")
                 f.set("type", "0")
                 f.set("x", str(xi))
-                f.set("y", str(y - yi))
+                f.set("y", str(sizey - yi -1))
                 array.append(f)
         
             
