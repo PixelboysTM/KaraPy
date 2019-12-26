@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="KaraPy", # Replace with your own username
-    version="0.4.0",
+    version="0.4.9.0.1",
     author="Pixelboys_TM",
     author_email="none@n.com",
     description="A Kara runtime for Python",
