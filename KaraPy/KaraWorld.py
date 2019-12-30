@@ -17,7 +17,7 @@ class World:
         return (int(self.width/self.mesh), int(self.height/self.mesh))
 
     def __init__(self,  meshSize, size, sp = 0.5, _title=""):
-        self.height, self.width = size
+        self.width, self.height = size
         self.height = self.height * 50 * meshSize
         self.width = self.width * 50 * meshSize
         self.mesh =  1 * 50 * meshSize 
@@ -31,26 +31,26 @@ class World:
         if sp >= 0 and sp <= 1:
             self.speed = 1.1 - sp 
         else:
-            print("Speed value must be between 0 and 1! \nDefaulted it to 0.5")
+            print("<KaraPy>Speed value must be between 0 and 1! \nDefaulted it to 0.5")
             self.speed = 0.5
 
     def build(self):
         self.canvas = turtle.Screen()
         #canvas.bgpic("logo.gif")
-        self.canvas.setup(width=width + 100, height=height + 100)
-        self.canvas.screensize(width , height)
+        self.canvas.setup(width=self.width + 100, height=self.height + 100)
+        self.canvas.screensize(self.width , self.height)
         self.canvas.bgcolor("lightgreen")
-        self.canvas.title("Kara Python version 0.2 " + title )
+        self.canvas.title("Kara Python version 0.2 " + self.title )
         t = turtle.Turtle()
         t.speed(10)
         t.hideturtle()
         t.penup()
-        t.goto( width/2 * -1, height/2 * -1 )
+        t.goto( self.width/2 * -1, self.height/2 * -1 )
         t.pendown()
-        t.goto(width/2, height/2 * -1)
-        t.goto(width/2, height/2)
-        t.goto(width/2 * -1, height/2)
-        t.goto(width/2 * -1, height/2 * -1)
+        t.goto(self.width/2, self.height/2 * -1)
+        t.goto(self.width/2, self.height/2)
+        t.goto(self.width/2 * -1, self.height/2)
+        t.goto(self.width/2 * -1, self.height/2 * -1)
         self.drawMesh(t)
         for w in range(int(self.width/self.mesh)):
             self.world.insert(w, [])
@@ -87,7 +87,7 @@ class World:
                 if tile == Type.Tree:
                     t = turtle.Turtle()
                     t.shape("square")
-                    t.shapesize((mesh - 10) /25)
+                    t.shapesize((self.mesh - 10) /25)
                     t.color("brown")
                     t.penup()
                     t.speed(100)
@@ -97,7 +97,7 @@ class World:
                 if tile == Type.Leaf:
                     t = turtle.Turtle()
                     t.shape("circle")
-                    t.shapesize((mesh - 10) /25)
+                    t.shapesize((self.mesh - 10) /25)
                     t.color("darkgreen")
                     t.penup()
                     t.speed(100)
@@ -108,7 +108,7 @@ class World:
                     if not self.Kara:
                         t = turtle.Turtle()
                         t.shape("turtle")
-                        t.shapesize((mesh - 10) /30)
+                        t.shapesize((self.mesh - 10) /30)
                         t.color("#750000")
                         t.penup()
                         t.hideturtle()
@@ -120,14 +120,14 @@ class World:
                         self.KaraObj = t
                         
                     else:
-                        print("There is already one Kara in the world")
+                        print("<KaraPy>There is already one Kara in the world")
             elif self.worldType[x][y] == "L" and tile == Type.Kara:
                 xa = x * self.mesh - self.width/2  + self.mesh/2
                 ya = y * self.mesh - self.height/2 + self.mesh/2
                 if not self.Kara:
                     t = turtle.Turtle()
                     t.shape("turtle")
-                    t.shapesize((mesh - 10) /30)
+                    t.shapesize((self.mesh - 10) /30)
                     t.color("red")
                     t.penup()
                     t.hideturtle()
@@ -138,11 +138,11 @@ class World:
                     self.Kara = True
                     self.KaraObj = t
                 else:
-                    print("There is already one Kara in the world")
+                    print("<KaraPy>There is already one Kara in the world")
             else:
-                print("There is already an Object")
+                print("<KaraPy>There is already an Object")
         else:
-            print("Position out of Grid")
+            print("<KaraPy>Position out of Grid")
 
     def getWorldArray(self):
         return self.worldType
@@ -156,7 +156,7 @@ class World:
                     if not (x == self.width/self.mesh -1):
                         o = self.worldType[x + 1][y]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = (x +1) * self.mesh - self.width/2  + self.mesh/2
                             ya = y * self.mesh - self.height/2 + self.mesh/2
@@ -165,14 +165,14 @@ class World:
                     else:
                         o = self.worldType[0][y]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = 0 * self.mesh - self.width/2  + self.mesh/2
                             ya = y * self.mesh - self.height/2 + self.mesh/2
                             self.KaraPos = (0 , y)
-                            self.KaraObj.goto(width/2 , ya)
+                            self.KaraObj.goto(self.width/2 , ya)
                             self.KaraObj.hideturtle()
-                            self.KaraObj.goto(width/2 * -1, ya)
+                            self.KaraObj.goto(self.width/2 * -1, ya)
                             self.KaraObj.showturtle()
                             self.KaraObj.goto(xa, ya)
 
@@ -180,7 +180,7 @@ class World:
                     if not (x == 0):
                         o = self.worldType[x - 1][y]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = (x - 1) * self.mesh - self.width/2  + self.mesh/2
                             ya = y * self.mesh - self.height/2 + self.mesh/2
@@ -189,14 +189,14 @@ class World:
                     else:
                         o = self.worldType[int(self.width/self.mesh - 1)][y]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = int(self.width/self.mesh - 1) * self.mesh - self.width/2  + self.mesh/2
                             ya = y * self.mesh - self.height/2 + self.mesh/2
                             KaraPos = (int(self.width/self.mesh - 1) , y)
-                            self.KaraObj.goto(width/2 * -1, ya)
+                            self.KaraObj.goto(self.width/2 * -1, ya)
                             self.KaraObj.hideturtle()
-                            self.KaraObj.goto(width/2, ya)
+                            self.KaraObj.goto(self.width/2, ya)
                             self.KaraObj.showturtle()
                             self.KaraObj.goto(xa, ya)
 
@@ -204,7 +204,7 @@ class World:
                     if not (y == self.height/self.mesh -1):
                         o = self.worldType[x][y + 1]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = x * self.mesh - self.width/2  + self.mesh/2
                             ya = (y + 1) * self.mesh - self.height/2 + self.mesh/2
@@ -213,14 +213,14 @@ class World:
                     else:
                         o = self.worldType[x][0]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = x * self.mesh - self.width/2  + self.mesh/2
                             ya = 0 * self.mesh - self.height/2 + self.mesh/2
                             self.KaraPos = (x , 0)
-                            self.KaraObj.goto(xa, height/2)
+                            self.KaraObj.goto(xa, self.height/2)
                             self.KaraObj.hideturtle()
-                            self.KaraObj.goto(xa, height/2 * -1)
+                            self.KaraObj.goto(xa, self.height/2 * -1)
                             self.KaraObj.showturtle()
                             self.KaraObj.goto(xa, ya)
 
@@ -228,7 +228,7 @@ class World:
                     if not (y == 0):
                         o = self.worldType[x][y - 1]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = x * self.mesh - self.width/2  + self.mesh/2
                             ya = (y - 1) * self.mesh - self.height/2 + self.mesh/2
@@ -237,14 +237,14 @@ class World:
                     else:
                         o = self.worldType[x][int(self.height/self.mesh -1)]
                         if o == "T":
-                            print("Kara can not walk there is a tree in front of her.")
+                            print("<KaraPy>Kara can not walk there is a tree in front of her.")
                         else:
                             xa = x * self.mesh - self.width/2  + self.mesh/2
                             ya = int(self.height/self.mesh - 1) * self.mesh - self.height/2 + self.mesh/2
                             self.KaraPos = (x , int(self.height/self.mesh - 1))
-                            self.KaraObj.goto(xa, height/2 * -1)
+                            self.KaraObj.goto(xa, self.height/2 * -1)
                             self.KaraObj.hideturtle()
-                            self.KaraObj.goto(xa, height/2)
+                            self.KaraObj.goto(xa, self.height/2)
                             self.KaraObj.showturtle()
                             self.KaraObj.goto(xa, ya)
 
@@ -269,19 +269,19 @@ class World:
             if move == Move.TurnRight:
                 if self.facing == Facing.Right:
                     self.facing = Facing.Down
-                    t = KaraObj
+                    t = self.KaraObj
                     t.right(90)
                 elif self.facing == Facing.Left:
                     self.facing = Facing.Up
-                    t = KaraObj 
+                    t = self.KaraObj 
                     t.right(90)
                 elif self.facing == Facing.Up:
                     self.facing = Facing.Right
-                    t = KaraObj
+                    t = self.KaraObj
                     t.right(90)
                 elif self.facing == Facing.Down:
                     self.facing = Facing.Left
-                    t = KaraObj
+                    t = self.KaraObj
                     t.right(90)
         
             if move == Move.Up:
@@ -293,7 +293,7 @@ class World:
                     self.world[x][y] = None
                     self.worldType[x][y] = "N"
                 else:
-                    print("Kara kann kein Kleeblat aufheben wo keins Liegt.")
+                    print("<KaraPy>Kara kann kein Kleeblat aufheben wo keins Liegt.")
         
             if move == Move.Down:
                 o = self.worldType[x][y]
@@ -320,80 +320,80 @@ class World:
                         self.worldType[x][y] = "L"
                     self.KaraObj.goto(xa,ya)
                 else:
-                    print("Kara kann kein Kleeblatt hinlegen wo bereits eins liegt.")
+                    print("<KaraPy>Kara kann kein Kleeblatt hinlegen wo bereits eins liegt.")
         else:
-            print("There is no Kara in the Wolrd")
+            print("<KaraPy>There is no Kara in the Wolrd")
         time.sleep(self.speed)
 
     def setSpeed(self, sp):
         if sp >= 0 and sp <= 1:
             	self.speed = 1.1 - sp
         else:
-            print("Speed value must be between 0 and 1! \nDefaulted it to 0.5")
+            print("<KaraPy>Speed value must be between 0 and 1! \nDefaulted it to 0.5")
             speed = 0.5
         
     def getSensor(self, sensor):
-        global KaraPos, worldType, facing
-        x,y = KaraPos
+        x,y = self.KaraPos
         if sensor == Sensor.L:
-            o = worldType[x][y]
+            o = self.worldType[x][y]
             return o == "L"
         if sensor == Sensor.TF:
-            if facing == Facing.Right:
-                o = worldType[x +1][y]
+            if self.facing == Facing.Right:
+                o = self.worldType[x +1][y]
                 return o == "T"
-            if facing == Facing.Left:
-                o = worldType[x -1][y]
+            if self.facing == Facing.Left:
+                o = self.worldType[x -1][y]
                 return o == "T"
-            if facing == Facing.Up:
-                o = worldType[x][y + 1]
+            if self.facing == Facing.Up:
+                o = self.worldType[x][y + 1]
                 return o == "T"
-            if facing == Facing.Down:
-                o = worldType[x][y -1]
+            if self.facing == Facing.Down:
+                o = self.worldType[x][y -1]
                 return o == "T"
         if sensor == Sensor.TL:
-            if facing == Facing.Right:
-                o = worldType[x][y + 1]
+            if self.facing == Facing.Right:
+                o = self.worldType[x][y + 1]
                 return o == "T"
-            if facing == Facing.Left:
-                o = worldType[x][y -1]
+            if self.facing == Facing.Left:
+                o = self.worldType[x][y -1]
                 return o == "T"
-            if facing == Facing.Up:
-                o = worldType[x + 1][y]
+            if self.facing == Facing.Up:
+                o = self.worldType[x + 1][y]
                 return o == "T"
-            if facing == Facing.Down:
-                o = worldType[x -1][y]
+            if self.facing == Facing.Down:
+                o = self.worldType[x -1][y]
                 return o == "T" 
         if sensor == Sensor.TR:
-            if facing == Facing.Right:
-                o = worldType[x -1][y]
+            if self.facing == Facing.Right:
+                o = self.worldType[x -1][y]
                 return o == "T"
-            if facing == Facing.Left:
-                o = worldType[x +1][y]
+            if self.facing == Facing.Left:
+                o = self.worldType[x +1][y]
                 return o == "T"
-            if facing == Facing.Up:
-                o = worldType[x][y - 1]
+            if self.facing == Facing.Up:
+                o = self.worldType[x][y - 1]
                 return o == "T"
-            if facing == Facing.Down:
-                o = worldType[x][y +1]
+            if self.facing == Facing.Down:
+                o = self.worldType[x][y +1]
                 return o == "T"
 
     def setBrain(self, _States):
-        global States
-        States = _States
+        self.States = _States
         
     def Start(self):
-        global States
         start = None
-        for state in States:
+        for state in self.States:
             if state.getStart():
                 start = state
         if not start == None:
             nextstate = start
             while not nextstate == None:
                 nextstate = self.execute(nextstate)
+            print("<KaraPy>Finished\nClick to close. ")
+            self.canvas.exitonclick()
+
         else:
-            print("You must define a Start State!")
+            print("<KaraPy>You must define a Start State!")
             return
 
     def execute(self, state):
@@ -414,8 +414,7 @@ class World:
                 self.Move(o)
             return ft.getNextState()
         else:
-            print("No Condition  matching!")
+            print("<KaraPy>No Condition  matching!")
             return None
-
+        print("<KaraPy>We are not sure what happened please try again.")
         return None
-
